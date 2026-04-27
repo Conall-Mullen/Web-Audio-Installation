@@ -1,7 +1,5 @@
 var exampleSocket = new WebSocket("ws://localhost:7474");
 
-console.log(exampleSocket);
-
 exampleSocket.onopen = function (event) {
   console.log("sending data...");
   exampleSocket.send("Ready, willing and able!");
@@ -9,8 +7,10 @@ exampleSocket.onopen = function (event) {
 
 exampleSocket.onmessage = function (event) {
   let e = JSON.parse(event.data);
-
   console.log(e);
+  $("#value_1").text(Math.round(e.value_1 * 100) / 100);
+  $("#value_2").text(Math.round(e.value_2 * 100) / 100);
+  $("#value_3").text(Math.round(e.value_3 * 100) / 100);
 };
 
 // Managing the interaction

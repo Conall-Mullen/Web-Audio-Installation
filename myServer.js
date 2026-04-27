@@ -62,7 +62,13 @@ wss.on("connection", function connection(ws, req) {
 
     ws.terminate();
   });
-
+  const starter = function (a) {
+    ws.send(
+      JSON.stringify({
+        start: a,
+      }),
+    );
+  };
   const sender = function (a, b, c) {
     ws.send(
       JSON.stringify({
@@ -78,6 +84,13 @@ wss.on("connection", function connection(ws, req) {
     console.log("send args: " + args);
     if (args.length === 3) {
       sender(args[0], args[1], args[2]);
+    }
+  });
+
+  Max.addHandler("startSound", (...args) => {
+    console.log("send args: " + args);
+    if (args.length) {
+      starter(args[0]);
     }
   });
 });
